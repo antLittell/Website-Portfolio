@@ -1,0 +1,57 @@
+body{
+    display: block;
+    margin: 0;
+    font-family: 'Recursive', sans-serif;
+}
+
+h1{
+    text-align: center;
+}
+
+#navbar{
+    position: fixed;
+    border-right: 5px grey solid;
+    width: 250px;
+    height: 100%;
+    top: 0;
+}
+
+#navigation{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0;
+}
+
+.nav-link{
+    display: block;
+    
+    padding: 18px 5px;
+    border-bottom: 3px black solid;
+}
+
+#first-h2{
+    margin-top: 0;
+}
+
+.main-section{
+    margin-top: 15px;
+}
+
+#main-part{
+    margin-left: 300px;
+}
+
+@media only screen and (max-width: 815px){
+    #navbar{
+        position: static;
+        border: none;
+        width: 100%;
+        
+    }
+
+    #main-part{
+        margin: 10px;
+    }
+
+
+}
