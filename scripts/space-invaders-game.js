@@ -6,7 +6,7 @@ Description: A space invaders clone with my own sprite work. Work in progress.
 */
 const CANVAS = document.getElementById("si-canvas");
 const CTX = CANVAS.getContext("2d");
-const SHIP_SPEED = 6;
+const SHIP_SPEED = 1;
 const SHOOTING_SPEED = 500;
 const LASER_SPEED = 15;
 const MAX_LASER_DIST = CANVAS.height;
