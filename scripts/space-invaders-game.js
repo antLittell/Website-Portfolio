@@ -12,7 +12,7 @@ const LASER_SPEED = 15;
 const MAX_LASER_DIST = CANVAS.height;
 const NUM_OF_ALIENS = 10;
 const ALIEN_SPACING = 0.75;
-let ALIEN_SPEED = 1;
+let ALIEN_SPEED = 6;
 let ALIEN_HEIGHT = CANVAS.height * 0.2;
 
 document.addEventListener("keydown", keyDown);
@@ -102,8 +102,13 @@ function updateLevel1(){
         
     }
 
-    if(ALIEN_HEIGHT >= ship.y){
-        clearInterval(lvl_1);
+    if(ALIEN_HEIGHT >= ship.y-30){
+        console.log("reached the end");
+        CTX.textAlign = "left";
+        CTX.textBaseline = "middle";
+        CTX.fillStyle = "white";
+        CTX.font = "30px Nunito Sans";
+        CTX.fillText("GAME OVER", CANVAS.width*0.415, CANVAS.height*0.4);
     }
 
 }
