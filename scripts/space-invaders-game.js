@@ -12,30 +12,39 @@ const LASER_SPEED = 15;
 const MAX_LASER_DIST = CANVAS.height;
 const NUM_OF_ALIENS = 10;
 const ALIEN_SPACING = 0.75;
+let ALIEN_SPEED = 1;
+let ALIEN_HEIGHT = CANVAS.height * 0.2;
 
 document.addEventListener("keydown", keyDown);
 document.addEventListener("keyup", keyUp);
 
-setInterval(updateGame, 1000/60);
+
 
 let ship = newShip();
 let enemyAliens = setUpAliens();
+let shipImage = new Image();
+let alienShipImage = new Image();
+let backgroundImage = new Image();
+
+shipImage.src = "images/game_images/ship.png";
+alienShipImage.src = "images/game_images/alien-ship.png";
+backgroundImage.src = "images/game_images/background.png";
+
+let lvl_1 = setInterval(updateLevel1, 1000/60);
 
 //------Functions------\\
 
-function updateGame(){
+function updateLevel1(){
     //drawing the canvas
     CTX.fillStyle = "black";
     CTX.fillRect(0, 0, CANVAS.width, CANVAS.height);
 
+    CTX.drawImage(backgroundImage, 0, 0);
+
     //drawing the ship
-    let shipImage = new Image();
-    shipImage.src = "images/game_images/ship.png";
     CTX.drawImage(shipImage, ship.x, ship.y);
 
     //drawing the aliens
-    let alienShipImage = new Image();
-    alienShipImage.src = "images/game_images/alien-ship.png";
     for(let i = 0; i < enemyAliens.length; i++){
         CTX.drawImage(alienShipImage, enemyAliens[i].x, enemyAliens[i].y);
     }
@@ -52,6 +61,24 @@ function updateGame(){
         }
     }
 
+    //for aliens moving
+    for(let i in enemyAliens){
+        if(enemyAliens[i].x+40 >= CANVAS.width || enemyAliens[i].x <= 0){
+            ALIEN_SPEED = -ALIEN_SPEED;
+            ALIEN_HEIGHT += 10;
+        }
+        enemyAliens[i].x += ALIEN_SPEED;
+        enemyAliens[i].y = ALIEN_HEIGHT;
+    }
+
+    if(ALIEN_HEIGHT > CANVAS.height/4){
+        if(ALIEN_SPEED < 0){ ALIEN_SPEED = -1.5 }
+        else { ALIEN_SPEED = 1.5 }
+    }
+    else if(ALIEN_HEIGHT > CANVAS.height/2){
+        if(ALIEN_SPEED < 0){ ALIEN_SPEED = -2 }
+        else { ALIEN_SPEED = 2 }
+    }
     //for shooting lasers
     ship.center = ship.x + 16;
     for(let i = 0; i < ship.lasers.length; i++){
@@ -74,6 +101,11 @@ function updateGame(){
         }
         
     }
+
+    if(ALIEN_HEIGHT >= ship.y){
+        clearInterval(lvl_1);
+    }
+
 }
 
 function newShip(){
@@ -93,7 +125,7 @@ function setUpAliens(){
     for(let i = 0; i < NUM_OF_ALIENS; i++){
         temp.push({
             x: 100 * ((i+1) * ALIEN_SPACING),
-            y: CANVAS.height * 0.2
+            y: ALIEN_HEIGHT
         })
     }
     return temp;
