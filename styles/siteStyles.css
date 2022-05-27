@@ -48,6 +48,11 @@ header{
     font-size: 23px;
 }
 
+#nav-head-link{
+    text-decoration: none;
+    color: rgb(218, 218, 218);
+}
+
 #links{
     display: flex;
     padding: 0;
@@ -71,7 +76,7 @@ header{
     position: absolute;
     content: '';
     height: 4px;
-    background-color: #35228a;
+    background-color: #284B63;
     top: 23px;
     width: 0%;
     transition: all ease-out 300ms;
